@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>Audio</title>
+    <script>
+    window.addEventListener("message",
+        function(evt) {
+            var audio = document.getElementById("bgAudio");
+            var data = evt.data;
+            if ("source" in data) {
+                audio.src = data.source;
+            }
+            if (data.action === "play") {
+                audio.play();
+            }
+            if (data.action === "stop") {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        },
+        false
+    );
+    </script>
+</head>
+<body>
+    <audio id="bgAudio" preload loop style="position: absolute; left: -9999px; top: -9999px">
+        <source src="musik.MP3" type="audio/mpeg">
+    </audio>
+</body>
+</html>
