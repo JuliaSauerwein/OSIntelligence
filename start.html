@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Fragebogen</title>
+    <script type="text/javascript">
+      // Code aus URL auslesen
+      function getCodeFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("code");
+      }
+
+      // Dynamisch 
+      function updateFrameSrc() {
+        const code = getCodeFromUrl();
+        let surveyUrl = "";
+
+        if (code) {
+          // Wenn ein Code vorhanden ist, URL mit Code
+          surveyUrl = "https://www.soscisurvey.de/osintelligence/?r=" + code;
+        } else {
+          // Wenn kein Code vorhanden ist, allgemeine URL 
+          surveyUrl = "https://www.soscisurvey.de/osintelligence/";
+        }
+
+        // Laden URL in Frame
+        parent.frames["survey"].location.href = surveyUrl;
+      }
+
+      // Weiterleitung ins Frame 
+      window.onload = updateFrameSrc;
+    </script>
+  </head>
+
+  <frameset rows="99%, 1%" border="0">
+    <frame src="about:blank" name="survey">
+    <frame src="music.html" name="music">
+  </frameset>
+</html>
